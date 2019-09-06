@@ -117,7 +117,7 @@ namespace WebApplication1
                 return response;
             else
             {
-                BookData.RemoveBooksByGenre(id);
+                BookData.RemoveBookById(id);
                 response.Message = "success";
                 response.Book = null;
                 return response;

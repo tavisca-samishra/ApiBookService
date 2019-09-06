@@ -12,43 +12,21 @@ namespace WebApplication1
     {
         public static List<Book> bookList;
 
-        //= new List<Book>()
-        //{
-        //    new Book { Title = "Sapiens", Rating = 4, Genre = "History" },
-        //    new Book { Title = "Grand Design", Rating = 5, Genre = "Science" },
-        //    new Book { Title = "Harry Potter", Rating = 3, Genre = "Fiction" },
-        //    new Book { Title = "C++", Rating = 4, Genre = "Coding" }
-        //};
-
         public static void PostBook(Book book)
         {
-            using (StreamReader r = new StreamReader(@"C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.1\bookData.json"))
-            {
-                string jsons = r.ReadToEnd();
-                bookList = JsonConvert.DeserializeObject<List<Book>>(jsons);
-            }
+            ReadJson();
             bookList.Add(book);
-            string json = JsonConvert.SerializeObject(bookList.ToArray());
-            File.WriteAllText(@"C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.1\bookData.json", json);
+            WriteJson();
         }
-
         public static IEnumerable<Book> GetBooks()
         {
-            using (StreamReader r = new StreamReader(@"C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.1\bookData.json"))
-            {
-                string json = r.ReadToEnd();
-                bookList = JsonConvert.DeserializeObject<List<Book>>(json);
-            }
+            ReadJson();
             return bookList;
         }
 
-        public static void RemoveBooksByGenre(int id)
+        public static void RemoveBookById(int id)
         {
-            using (StreamReader r = new StreamReader(@"C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.1\bookData.json"))
-            {
-                string jsons = r.ReadToEnd();
-                bookList = JsonConvert.DeserializeObject<List<Book>>(jsons);
-            }
+            ReadJson();
             for (int i = 0; i < bookList.Count; i++)
             {
                 if (bookList[i].Id == id)
@@ -57,25 +35,34 @@ namespace WebApplication1
                     break;
                 }
             }
+            WriteJson();
+        }
+
+        public static void UpdateBooks(int id, Book book)
+        {
+            ReadJson();
+            for (int i = 0; i < bookList.Count; i++)
+            {
+                if (bookList[i].Id == id)
+                    bookList[i] = book;
+            }
+            WriteJson();
+        }
+
+        private static void WriteJson()
+        {
             string json = JsonConvert.SerializeObject(bookList.ToArray());
             File.WriteAllText(@"C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.1\bookData.json", json);
         }
 
-        public static void UpdateBooks(int id, Book book)
+        private static void ReadJson()
         {
             using (StreamReader r = new StreamReader(@"C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.1\bookData.json"))
             {
                 string jsons = r.ReadToEnd();
                 bookList = JsonConvert.DeserializeObject<List<Book>>(jsons);
             }
-            for (int i = 0; i < bookList.Count; i++)
-            {
-                if (bookList[i].Id == id)
-                    bookList[i] = book;
-            }
-
-            string json = JsonConvert.SerializeObject(bookList.ToArray());
-            File.WriteAllText(@"C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.1\bookData.json", json);
         }
+
     }
 }
