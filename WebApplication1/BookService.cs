@@ -29,7 +29,6 @@ namespace WebApplication1
                     return response;
                 }
             }
-            response.Book = null;
             response.Message = "Book with given id not found!";
             return response;
         }
@@ -49,7 +48,6 @@ namespace WebApplication1
             }
             BookData.PostBook(book);
             response.Message = "success";
-            response.Book = null;
             return response;
         }
         public Response UpdateBook(int id, Book book)
@@ -67,7 +65,6 @@ namespace WebApplication1
                 }
                 else
                 {
-                    response.Book = null;
                     response.Message = "Book with given id not found!";
                 }
             }
@@ -88,8 +85,6 @@ namespace WebApplication1
                     return CheckPrice();
                 }
                 BookData.UpdateBooks(id, book);
-                response.Message = "success";
-                response.Book = null;
                 return response;
             }
         }
@@ -109,7 +104,6 @@ namespace WebApplication1
                 }
                 else
                 {
-                    response.Book = null;
                     response.Message = "Book with given id not found!";
                 }
             }
@@ -118,29 +112,24 @@ namespace WebApplication1
             else
             {
                 BookData.RemoveBookById(id);
-                response.Message = "success";
-                response.Book = null;
                 return response;
             }
         }
         private Response CheckPrice()
         {
             response.Message = "Price can't be negative.";
-            response.Book = null;
             return response;
         }
 
         private Response CheckId()
         {
             response.Message = "Id can't be negative.";
-            response.Book = null;
             return response;
         }
 
         private Response CheckAlphabet()
         {
             response.Message = "Name, Category and Author: should contain only alphabets.";
-            response.Book = null;
             return response;
         }
 

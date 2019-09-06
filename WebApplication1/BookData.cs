@@ -32,7 +32,6 @@ namespace WebApplication1
                 if (bookList[i].Id == id)
                 {
                     bookList.RemoveAt(i);
-                    break;
                 }
             }
             WriteJson();
