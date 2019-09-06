@@ -104,7 +104,7 @@ namespace ServiceTest
         public void Test_GetBook_Method()
         {
             response = bookService.GetBook(3);
-            Assert.Equal("Sports", response.Book.Genre);
+            Assert.Equal("Fiction", response.Book.Genre);
         }
         [Fact]
         public void Test_AddBook_Method_With_Negative_Id()
