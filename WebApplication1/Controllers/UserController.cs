@@ -13,40 +13,44 @@ namespace WebApplication1.Controllers
     public class UserController : ControllerBase
     {
         BookService bookService = new BookService();
-
+        Response response;
         // GET: api/User
         [HttpGet]
-        public IEnumerable<Book> Get()
+        public ActionResult<Book> Get()
         {
-            return bookService.GetBook();
+            return StatusCode(200, bookService.GetBook());
         }
 
         // GET: api/User/5
         [HttpGet("{id}", Name = "Get")]
-        public Response Get(int id)
+        public ActionResult<Response> Get(int id)
         {
-            return bookService.GetBook(id);
+            response = bookService.GetBook(id);
+            return StatusCode(response.Status, response);
         }
 
         // POST: api/User
         [HttpPost]
-        public Response Post([FromBody] Book value)
+        public ActionResult<Response> Post([FromBody] Book book)
         {
-            return bookService.AddBook(value);
+            response= bookService.AddBook(book);
+            return StatusCode(response.Status, response);
         }
 
         // PUT: api/User/5
         [HttpPut("{id}")]
-        public Response Put(int id, [FromBody] Book value)
+        public ActionResult<Response> Put(int id, [FromBody] Book book)
         {
-            return bookService.UpdateBook(id, value);
+            response= bookService.UpdateBook(id, book);
+            return StatusCode(response.Status, response);
         }
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]
-        public Response Delete(int id)
+        public ActionResult<Response> Delete(int id)
         {
-            return bookService.RemoveBooks(id);
+            response= bookService.RemoveBooks(id);
+            return StatusCode(response.Status, response);
         }
     }
 }

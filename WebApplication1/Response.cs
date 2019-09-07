@@ -8,7 +8,8 @@ namespace WebApplication1
 {
     public class Response
     {
-        public string Message { get; set; }
+        public List<string> Message { get; set; } = new List<string>();
         public Book Book { get; set; }
+        public int Status { get; set; } = 200;
     }
 }

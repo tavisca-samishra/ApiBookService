@@ -18,119 +18,191 @@ namespace WebApplication1
         {
             if (id < 0)
             {
-                return CheckId();
+                CheckGivenId();
+                Forbidden();
+                return response;
             }
             foreach (var item in books)
             {
                 if (item.Id == id)
                 {
                     response.Book = item;
-                    response.Message = "success";
+                    Success();
+                    response.Status = 302;
                     return response;
                 }
             }
-            response.Message = "Book with given id not found!";
+            IdNotAvailable();
             return response;
         }
+
+        private void Forbidden()
+        {
+            response.Status = 403;
+        }
+
+        private void IdNotAvailable()
+        {
+            response.Message.Add("Book with given id not found!");
+        }
+
+        private void Success()
+        {
+            response.Message.Add("success");
+        }
+
         public Response AddBook(Book book)
         {
-            if (book.Author.Any(char.IsDigit) || book.Genre.Any(char.IsDigit) || book.Title.Any(char.IsDigit))
+            if (book.Author.Any(char.IsDigit))
             {
-                return CheckAlphabet();
+                CheckAuthor();
+            }
+            if (book.Title.Any(char.IsDigit))
+            {
+                CheckTitle();
+            }
+            if (book.Genre.Any(char.IsDigit))
+            {
+                CheckCategory();
             }
             if (book.Id < 0)
             {
-                return CheckId();
+                CheckId();
             }
             if (book.Price < 0)
             {
-                return CheckPrice();
+                CheckPrice();
             }
-            BookData.PostBook(book);
-            response.Message = "success";
+            if (response.Message.Count == 0)
+            {
+                BookData.PostBook(book);
+                response.Status = 201;
+                Success();
+            }
+            else
+            {
+                BadRequest();
+            }
             return response;
         }
+
+        private void BadRequest()
+        {
+            response.Status = 400;
+        }
+
         public Response UpdateBook(int id, Book book)
         {
             if (id < 0)
             {
-                return CheckId();
+                CheckGivenId();
+                Forbidden();
             }
-            foreach (var item in books)
-            {
-                if (item.Id == id)
-                {
-                    response.Message = "success";
-                    break;
-                }
-                else
-                {
-                    response.Message = "Book with given id not found!";
-                }
-            }
-            if (response.Message != "success")
-                return response;
             else
             {
-                if (book.Author.Any(char.IsDigit) || book.Genre.Any(char.IsDigit) || book.Title.Any(char.IsDigit))
+                IdNotAvailable();
+                foreach (var item in books)
                 {
-                    return CheckAlphabet();
+                    if (item.Id == id)
+                    {
+                        response.Message.Clear();
+                    }
                 }
-                if (book.Id < 0)
-                {
-                    return CheckId();
-                }
-                if (book.Price < 0)
-                {
-                    return CheckPrice();
-                }
-                BookData.UpdateBooks(id, book);
-                return response;
             }
+
+            if (book.Author.Any(char.IsDigit))
+            {
+                CheckAuthor();
+            }
+            if (book.Title.Any(char.IsDigit))
+            {
+                CheckTitle();
+            }
+            if (book.Genre.Any(char.IsDigit))
+            {
+                CheckCategory();
+            }
+            if (book.Id < 0)
+            {
+                CheckId();
+            }
+            if (book.Price < 0)
+            {
+                CheckPrice();
+            }
+            if (response.Message.Count == 0)
+            {
+                Success();
+                response.Status = 202;
+                BookData.UpdateBooks(id, book);
+            }
+            else
+            {
+                if (response.Status != 403)
+                    BadRequest();
+            }
+            return response;
+
         }
 
         public Response RemoveBooks(int id)
         {
             if (id < 0)
             {
-                return CheckId();
+                CheckGivenId();
+                Forbidden();
             }
-            foreach (var item in books)
-            {
-                if (item.Id == id)
-                {
-                    response.Message = "success";
-                    break;
-                }
-                else
-                {
-                    response.Message = "Book with given id not found!";
-                }
-            }
-            if (response.Message != "success")
-                return response;
             else
             {
-                BookData.RemoveBookById(id);
-                return response;
+                IdNotAvailable();
+                foreach (var item in books)
+                {
+                    if (item.Id == id)
+                    {
+                        response.Message.Clear();
+                    }
+                }
             }
-        }
-        private Response CheckPrice()
-        {
-            response.Message = "Price can't be negative.";
+            if (response.Message.Count == 0)
+            {
+                Success();
+                response.Status = 202;
+                BookData.RemoveBookById(id);
+            }
+            else
+            {
+                if (response.Status != 403)
+                    BadRequest();
+            }
             return response;
         }
 
-        private Response CheckId()
+        private void CheckGivenId()
         {
-            response.Message = "Id can't be negative.";
-            return response;
+            response.Message.Add("Requested Id can't be negative.");
         }
 
-        private Response CheckAlphabet()
+        private void CheckPrice()
         {
-            response.Message = "Name, Category and Author: should contain only alphabets.";
-            return response;
+            response.Message.Add("Price can't be negative.");
+        }
+
+        private void CheckId()
+        {
+            response.Message.Add("Id can't be negative.");
+        }
+
+        private void CheckTitle()
+        {
+            response.Message.Add("Title should only contain alphabets.");
+        }
+        private void CheckCategory()
+        {
+            response.Message.Add("Category should only contain alphabets.");
+        }
+        private void CheckAuthor()
+        {
+            response.Message.Add("Author should only contain alphabets.");
         }
 
     }
