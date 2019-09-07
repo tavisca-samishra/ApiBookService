@@ -10,6 +10,7 @@ namespace WebApplication1
     {
         IEnumerable<Book> books = BookData.GetBooks();
         Response response = new Response();
+
         public IEnumerable<Book> GetBook()
         {
             return books;
@@ -35,44 +36,9 @@ namespace WebApplication1
             IdNotAvailable();
             return response;
         }
-
-        private void Forbidden()
-        {
-            response.Status = 403;
-        }
-
-        private void IdNotAvailable()
-        {
-            response.Message.Add("Book with given id not found!");
-        }
-
-        private void Success()
-        {
-            response.Message.Add("success");
-        }
-
         public Response AddBook(Book book)
         {
-            if (book.Author.Any(char.IsDigit))
-            {
-                CheckAuthor();
-            }
-            if (book.Title.Any(char.IsDigit))
-            {
-                CheckTitle();
-            }
-            if (book.Genre.Any(char.IsDigit))
-            {
-                CheckCategory();
-            }
-            if (book.Id < 0)
-            {
-                CheckId();
-            }
-            if (book.Price < 0)
-            {
-                CheckPrice();
-            }
+            Validation(book);
             if (response.Message.Count == 0)
             {
                 BookData.PostBook(book);
@@ -85,12 +51,6 @@ namespace WebApplication1
             }
             return response;
         }
-
-        private void BadRequest()
-        {
-            response.Status = 400;
-        }
-
         public Response UpdateBook(int id, Book book)
         {
             if (id < 0)
@@ -110,26 +70,7 @@ namespace WebApplication1
                 }
             }
 
-            if (book.Author.Any(char.IsDigit))
-            {
-                CheckAuthor();
-            }
-            if (book.Title.Any(char.IsDigit))
-            {
-                CheckTitle();
-            }
-            if (book.Genre.Any(char.IsDigit))
-            {
-                CheckCategory();
-            }
-            if (book.Id < 0)
-            {
-                CheckId();
-            }
-            if (book.Price < 0)
-            {
-                CheckPrice();
-            }
+            Validation(book);
             if (response.Message.Count == 0)
             {
                 Success();
@@ -144,7 +85,6 @@ namespace WebApplication1
             return response;
 
         }
-
         public Response RemoveBooks(int id)
         {
             if (id < 0)
@@ -177,21 +117,57 @@ namespace WebApplication1
             return response;
         }
 
+        private void Forbidden()
+        {
+            response.Status = 403;
+        }
+        private void IdNotAvailable()
+        {
+            response.Message.Add("Book with given id not found!");
+        }
+        private void Success()
+        {
+            response.Message.Add("success");
+        }
+        private void Validation(Book book)
+        {
+            if (book.Author.Any(char.IsDigit))
+            {
+                CheckAuthor();
+            }
+            if (book.Title.Any(char.IsDigit))
+            {
+                CheckTitle();
+            }
+            if (book.Genre.Any(char.IsDigit))
+            {
+                CheckCategory();
+            }
+            if (book.Id < 0)
+            {
+                CheckId();
+            }
+            if (book.Price < 0)
+            {
+                CheckPrice();
+            }
+        }
+        private void BadRequest()
+        {
+            response.Status = 400;
+        }
         private void CheckGivenId()
         {
             response.Message.Add("Requested Id can't be negative.");
         }
-
         private void CheckPrice()
         {
             response.Message.Add("Price can't be negative.");
         }
-
         private void CheckId()
         {
             response.Message.Add("Id can't be negative.");
         }
-
         private void CheckTitle()
         {
             response.Message.Add("Title should only contain alphabets.");
