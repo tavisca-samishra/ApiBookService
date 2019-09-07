@@ -10,18 +10,18 @@ namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class booksController : ControllerBase
     {
         BookService bookService = new BookService();
         Response response;
-        // GET: api/User
+        // GET: api/books
         [HttpGet]
         public ActionResult<Book> Get()
         {
             return StatusCode(200, bookService.GetBook());
         }
 
-        // GET: api/User/5
+        // GET: api/books/5
         [HttpGet("{id}", Name = "Get")]
         public ActionResult<Response> Get(int id)
         {
@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
             return StatusCode(response.Status, response);
         }
 
-        // POST: api/User
+        // POST: api/books
         [HttpPost]
         public ActionResult<Response> Post([FromBody] Book book)
         {
@@ -37,7 +37,7 @@ namespace WebApplication1.Controllers
             return StatusCode(response.Status, response);
         }
 
-        // PUT: api/User/5
+        // PUT: api/books/5
         [HttpPut("{id}")]
         public ActionResult<Response> Put(int id, [FromBody] Book book)
         {
@@ -45,7 +45,7 @@ namespace WebApplication1.Controllers
             return StatusCode(response.Status, response);
         }
 
-        // DELETE: api/User/5
+        // DELETE: api/books/5
         [HttpDelete("{id}")]
         public ActionResult<Response> Delete(int id)
         {
