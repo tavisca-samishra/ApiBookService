@@ -1,0 +1,17 @@
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\ServiceTest.deps.json
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\ServiceTest.runtimeconfig.json
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\ServiceTest.runtimeconfig.dev.json
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\ServiceTest.dll
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\ServiceTest.pdb
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\WebApplication1.dll
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\bin\Debug\netcoreapp2.2\WebApplication1.pdb
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\obj\Debug\netcoreapp2.2\ServiceTest.csprojAssemblyReference.cache
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\obj\Debug\netcoreapp2.2\ServiceTest.csproj.CoreCompileInputs.cache
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\obj\Debug\netcoreapp2.2\ServiceTest.AssemblyInfoInputs.cache
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\obj\Debug\netcoreapp2.2\ServiceTest.AssemblyInfo.cs
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\obj\Debug\netcoreapp2.2\ServiceTest.csproj.CopyComplete
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\obj\Debug\netcoreapp2.2\ServiceTest.dll
+C:\Users\smishra\source\repos\WebApplication1\ServiceTest\obj\Debug\netcoreapp2.2\ServiceTest.pdb

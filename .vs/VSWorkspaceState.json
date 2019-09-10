@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ServiceTest",
+    "\\ServiceTest\\bin",
+    "\\ServiceTest\\bin\\Debug",
+    "\\ServiceTest\\bin\\Debug\\netcoreapp2.1",
+    "\\WebApplication1"
+  ],
+  "SelectedNode": "\\ServiceTest\\bin\\Debug\\netcoreapp2.1\\bookData.json",
+  "PreviewInSolutionExplorer": false
+}

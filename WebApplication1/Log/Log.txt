@@ -1,0 +1,21 @@
+[Log Id = 1]
+REQUEST : 
+	/api/books  GET 
+RESPONSE : 
+  Status: 200 
+  Message: [{"id":1,"author":"a","title":"Book","price":3,"genre":"Romance"},{"id":2,"author":"Fatima Bhutto","title":"The Shadow Of The Crescent Moon\t","price":3,"genre":"Romance"},{"id":3,"author":"Amish Tripathi","title":"The Oath of the Vayuputras","price":3,"genre":"Fiction"},{"id":4,"author":"Stephen Hawking","title":"Theory of everything","price":5,"genre":"Science"},{"id":2,"author":"a","title":"Book","price":3,"genre":"Romance"},{"id":-2,"author":"a2","title":"Book","price":-3,"genre":"Romance"},{"id":5,"author":"Chetan Bhagat","title":"Three mistakes of my life","price":300,"genre":"Fiction"},{"id":5,"author":"Chetan Bhagat","title":"Three mistakes of my life","price":300,"genre":"Fiction"},{"id":5,"author":"Chetan Bhagat","title":"Three mistakes of my life","price":300,"genre":"Fiction"},{"id":5,"author":"Chetan Bhagat","title":"Three mistakes of my life","price":300,"genre":"Fiction"},{"id":5,"author":"Chetan Bhagat","title":"Three mistakes of my life","price":300,"genre":"Fiction"},{"id":5,"author":"Chetan Bhagat","title":"Three mistakes of my life","price":300,"genre":"Fiction"},{"id":5,"author":"Chetan Bhagat","title":"Three mistakes of my life","price":300,"genre":"Fiction"},{"id":5,"author":"Chetan Bhagat","title":"Three mistakes of my life","price":300,"genre":"Fiction"},{"id":5,"author":"Chetan Bhagat","title":"Three mistakes of my life","price":300,"genre":"Fiction"},{"id":5,"author":"","title":"Book","price":3,"genre":"Romance"},{"id":1,"author":"jh","title":"sadf","price":3,"genre":"Romance"},{"id":1,"author":"jh","title":"sadf","price":3,"genre":"Romance"},{"id":1,"author":"jh","title":"sadf","price":3,"genre":"Romance"},{"id":1,"author":"jh","title":"sadf","price":3,"genre":"Romance"},{"id":1,"author":"jh","title":"sadf","price":3,"genre":"Romance"},{"id":1,"author":"jh","title":"sadf","price":3,"genre":"Romance"},{"id":1,"author":"jh","title":"sadf","price":3,"genre":"Romance"},{"id":1,"author":"jh","title":"sadf","price":3,"genre":"Romance"},{"id":1,"author":"jh","title":"sadf","price":3,"genre":"Romance"}]
+
+[Log Id = 2]
+REQUEST : 
+	/api/books  POST 
+RESPONSE : 
+  Status: 200 
+  Message: {"version":{"major":1,"minor":1,"build":-1,"revision":-1,"majorRevision":-1,"minorRevision":-1},"content":null,"statusCode":200,"reasonPhrase":"OK","headers":[],"requestMessage":null,"isSuccessStatusCode":true}
+
+[Log Id = 1]
+REQUEST : 
+	/api/books  POST 
+RESPONSE : 
+  Status: 200 
+  Message: {"version":{"major":1,"minor":1,"build":-1,"revision":-1,"majorRevision":-1,"minorRevision":-1},"content":null,"statusCode":200,"reasonPhrase":"OK","headers":[],"requestMessage":null,"isSuccessStatusCode":true}
+
