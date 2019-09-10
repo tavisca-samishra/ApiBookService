@@ -9,54 +9,7 @@ namespace ServiceTest
     {
         BookService bookService = new BookService();
         Response response;
-        Book bookWithNegativeId = new Book()
-        {
-            Id = -2,
-            Author = "Chetan Bhagat",
-            Title = "Three mistakes of my life",
-            Price = 300,
-            Genre = "Fiction"
-        };
-        Book bookWithUnavailableId = new Book()
-        {
-            Id = 10,
-            Author = "Chetan Bhagat",
-            Title = "Three mistakes of my life",
-            Price = 300,
-            Genre = "Fiction"
-        };
-        Book bookWithNegativePrice = new Book()
-        {
-            Id = 5,
-            Author = "Chetan Bhagat",
-            Title = "Three mistakes of my life",
-            Price = -300,
-            Genre = "Fiction"
-        };
-        Book bookWithInvalidAuthor = new Book()
-        {
-            Id = 2,
-            Author = "Chetan23 Bhagat",
-            Title = "Three mistakes of my life",
-            Price = 300,
-            Genre = "Fiction"
-        };
-        Book bookWithInvalidTitle = new Book()
-        {
-            Id = 5,
-            Author = "Chetan Bhagat",
-            Title = "Three mistakes344 of my life",
-            Price = 300,
-            Genre = "Fiction"
-        };
-        Book bookWithInvalidGenre = new Book()
-        {
-            Id = 5,
-            Author = "Chetan Bhagat",
-            Title = "Three mistakes of my life",
-            Price = 300,
-            Genre = "Ficti324on"
-        };
+       
         Book book = new Book()
         {
             Id = 5,
@@ -72,10 +25,6 @@ namespace ServiceTest
             GivenNegativeId();
         }
 
-        private void NegativeId()
-        {
-            Assert.Equal("Id can't be negative.", response.Message[0]);
-        }
         private void GivenNegativeId()
         {
             Assert.Equal("Requested Id can't be negative.", response.Message[0]);
@@ -110,94 +59,14 @@ namespace ServiceTest
             response = bookService.GetBook(3);
             Assert.Equal("Fiction", response.Book.Genre);
         }
-        [Fact]
-        public void Test_AddBook_Method_With_Negative_Id()
-        {
-            response = bookService.AddBook(bookWithNegativeId);
-            NegativeId();
-        }
 
         [Fact]
-        public void Test_AddBook_Method_With_Valid_Id()
+        public void Test_AddBook_Method()
         {
             response = bookService.AddBook(book);
             Valid();
         }
-
-        [Fact]
-        public void Test_AddBook_Method_With_Negative_Price()
-        {
-            response = bookService.AddBook(bookWithNegativePrice);
-            NegativePrice();
-        }
-
-        private void NegativePrice()
-        {
-            Assert.Equal("Price can't be negative.", response.Message[0]);
-        }
-
-        [Fact]
-        public void Test_AddBook_Method_With_Valid_Price()
-        {
-            response = bookService.AddBook(book);
-            Valid();
-        }
-        [Fact]
-        public void Test_AddBook_Method_With_Invalid_Author()
-        {
-            response = bookService.AddBook(bookWithInvalidAuthor);
-            InvalidAuthor();
-        }
-
-        private void InvalidAuthor()
-        {
-            Assert.Equal("Author should only contain alphabets.", response.Message[0]);
-        }
-         private void InvalidGenre()
-        {
-            Assert.Equal("Category should only contain alphabets.", response.Message[0]);
-        }
-         private void InvalidTitle()
-        {
-            Assert.Equal("Title should only contain alphabets.", response.Message[0]);
-        }
-
-        [Fact]
-        public void Test_AddBook_Method_With_Valid_Author()
-        {
-            response = bookService.AddBook(book);
-            Valid();
-        }
-        [Fact]
-        public void Test_AddBook_Method_With_Invalid_Title()
-        {
-            response = bookService.AddBook(bookWithInvalidTitle);
-            InvalidTitle();
-        }
-        [Fact]
-        public void Test_AddBook_Method_With_Valid_Title()
-        {
-            response = bookService.AddBook(book);
-            Valid();
-        }
-        [Fact]
-        public void Test_AddBook_Method_With_Invalid_Genre()
-        {
-            response = bookService.AddBook(bookWithInvalidGenre);
-            InvalidGenre();
-        }
-        [Fact]
-        public void Test_AddBook_Method_With_Valid_Genre()
-        {
-            response = bookService.AddBook(book);
-            Valid();
-        }
-        [Fact]
-        public void Test_UpdateBook_Method_With_Negative_Id()
-        {
-            response = bookService.UpdateBook(5,bookWithNegativeId);
-            NegativeId();
-        }
+     
         [Fact]
         public void Test_UpdateBook_Method_With_Given_Negative_Id()
         {
@@ -211,62 +80,15 @@ namespace ServiceTest
             UnavailableId();
         }
         [Fact]
-        public void Test_UpdateBook_Method_With_Valid_Available_Id()
+        public void Test_UpdateBook_Method()
         {
             response = bookService.UpdateBook(5,book);
             Valid();
         }
 
+      
         [Fact]
-        public void Test_UpdateBook_Method_With_Negative_Price()
-        {
-            response = bookService.UpdateBook(5,bookWithNegativePrice);
-            NegativePrice();
-        }
-        [Fact]
-        public void Test_UpdateBook_Method_With_Valid_Price()
-        {
-            response = bookService.UpdateBook(5, book);
-            Valid();
-        }
-        [Fact]
-        public void Test_UpdateBook_Method_With_Invalid_Author()
-        {
-            response = bookService.UpdateBook(5, bookWithInvalidAuthor);
-            InvalidAuthor();
-        }
-        [Fact]
-        public void Test_UpdateBook_Method_With_Valid_Author()
-        {
-            response = bookService.UpdateBook(5, book);
-            Valid();
-        }
-        [Fact]
-        public void Test_UpdateBook_Method_With_Invalid_Title()
-        {
-            response = bookService.UpdateBook(5, bookWithInvalidTitle);
-            InvalidTitle();
-        }
-        [Fact]
-        public void Test_UpdateBook_Method_With_Valid_Title()
-        {
-            response = bookService.UpdateBook(5, book);
-            Valid();
-        }
-        [Fact]
-        public void Test_UpdateBook_Method_With_Invalid_Genre()
-        {
-            response = bookService.UpdateBook(5, bookWithInvalidGenre);
-            InvalidGenre();
-        }
-        [Fact]
-        public void Test_UpdateBook_Method_With_Valid_Genre()
-        {
-            response = bookService.UpdateBook(5, book);
-            Valid();
-        }
-        [Fact]
-        public void Test_RemoveBooks_Method_With_Negative_Id()
+        public void Test_RemoveBooks_Method_With_Given_Negative_Id()
         {
             response = bookService.RemoveBooks(-2);
             GivenNegativeId();
@@ -278,7 +100,7 @@ namespace ServiceTest
             UnavailableId();
         }
         [Fact]
-        public void Test_RemoveBooks_Method_With_Available_Id()
+        public void Test_RemoveBooks_Method()
         {
             response = bookService.RemoveBooks(5);
             Valid();

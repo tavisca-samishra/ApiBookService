@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Net.Http;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class booksController : ControllerBase
+    public class booksController : Controller
     {
         BookService bookService = new BookService();
+        HttpRequestMessage request = new HttpRequestMessage();
         Response response;
         // GET: api/books
         [HttpGet]
@@ -31,25 +29,41 @@ namespace WebApplication1.Controllers
 
         // POST: api/books
         [HttpPost]
-        public ActionResult<Response> Post([FromBody] Book book)
+        [ValidateModel]
+        public HttpResponseMessage Post(Book book)
         {
-            response= bookService.AddBook(book);
-            return StatusCode(response.Status, response);
+            if (ModelState.IsValid)
+            {
+                response = bookService.AddBook(book);
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState.ToString());
+            }
         }
 
         // PUT: api/books/5
         [HttpPut("{id}")]
-        public ActionResult<Response> Put(int id, [FromBody] Book book)
+        [ValidateModel]
+        public HttpResponseMessage Put(int id, [FromBody] Book book)
         {
-            response= bookService.UpdateBook(id, book);
-            return StatusCode(response.Status, response);
+            if (ModelState.IsValid)
+            {
+                response = bookService.UpdateBook(id, book);
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState.ToString());
+            }
         }
 
         // DELETE: api/books/5
         [HttpDelete("{id}")]
         public ActionResult<Response> Delete(int id)
         {
-            response= bookService.RemoveBooks(id);
+            response = bookService.RemoveBooks(id);
             return StatusCode(response.Status, response);
         }
     }

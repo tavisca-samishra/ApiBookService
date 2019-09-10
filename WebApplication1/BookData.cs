@@ -1,16 +1,14 @@
 ﻿using Newtonsoft.Json;
-using System;
+using ServiceStack.FluentValidation.Attributes;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApplication1.Models;
 
 namespace WebApplication1
 {
     public class BookData
     {
-        public static List<Book> bookList;
+        static List<Book> bookList;
 
         public static void PostBook(Book book)
         {

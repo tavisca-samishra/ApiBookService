@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WebApplication1.Models;
 
 namespace WebApplication1
@@ -38,17 +35,9 @@ namespace WebApplication1
         }
         public Response AddBook(Book book)
         {
-            Validation(book);
-            if (response.Message.Count == 0)
-            {
-                BookData.PostBook(book);
-                response.Status = 201;
-                Success();
-            }
-            else
-            {
-                BadRequest();
-            }
+            BookData.PostBook(book);
+            response.Status = 201;
+            Success();
             return response;
         }
         public Response UpdateBook(int id, Book book)
@@ -69,21 +58,13 @@ namespace WebApplication1
                     }
                 }
             }
-
-            Validation(book);
             if (response.Message.Count == 0)
             {
                 Success();
                 response.Status = 202;
                 BookData.UpdateBooks(id, book);
             }
-            else
-            {
-                if (response.Status != 403)
-                    BadRequest();
-            }
             return response;
-
         }
         public Response RemoveBooks(int id)
         {
@@ -109,18 +90,9 @@ namespace WebApplication1
                 response.Status = 202;
                 BookData.RemoveBookById(id);
             }
-            else
-            {
-                if (response.Status != 403)
-                    BadRequest();
-            }
             return response;
         }
 
-        private void Forbidden()
-        {
-            response.Status = 403;
-        }
         private void IdNotAvailable()
         {
             response.Message.Add("Book with given id not found!");
@@ -129,56 +101,13 @@ namespace WebApplication1
         {
             response.Message.Add("success");
         }
-        private void Validation(Book book)
-        {
-            if (book.Author.Any(char.IsDigit))
-            {
-                CheckAuthor();
-            }
-            if (book.Title.Any(char.IsDigit))
-            {
-                CheckTitle();
-            }
-            if (book.Genre.Any(char.IsDigit))
-            {
-                CheckCategory();
-            }
-            if (book.Id < 0)
-            {
-                CheckId();
-            }
-            if (book.Price < 0)
-            {
-                CheckPrice();
-            }
-        }
-        private void BadRequest()
-        {
-            response.Status = 400;
-        }
         private void CheckGivenId()
         {
             response.Message.Add("Requested Id can't be negative.");
         }
-        private void CheckPrice()
+        private void Forbidden()
         {
-            response.Message.Add("Price can't be negative.");
-        }
-        private void CheckId()
-        {
-            response.Message.Add("Id can't be negative.");
-        }
-        private void CheckTitle()
-        {
-            response.Message.Add("Title should only contain alphabets.");
-        }
-        private void CheckCategory()
-        {
-            response.Message.Add("Category should only contain alphabets.");
-        }
-        private void CheckAuthor()
-        {
-            response.Message.Add("Author should only contain alphabets.");
+            response.Status = 403;
         }
 
     }
